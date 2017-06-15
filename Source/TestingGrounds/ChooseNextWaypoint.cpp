@@ -2,7 +2,7 @@
 
 #include "ChooseNextWaypoint.h"
 #include "AIController.h"
-#include "ThirdPersonCharacter.h"
+#include "PatrollingGuard.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 EBTNodeResult::Type UChooseNextWaypoint::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -11,7 +11,7 @@ EBTNodeResult::Type UChooseNextWaypoint::ExecuteTask(UBehaviorTreeComponent& Own
 	//get patrol points
 	auto AIController = OwnerComp.GetAIOwner();
 	auto ControlledPawn = AIController->GetPawn();
-	auto PatrollingGuard = Cast<AThirdPersonCharacter>(ControlledPawn);
+	auto PatrollingGuard = Cast<APatrollingGuard>(ControlledPawn);
 	auto PatrolPoints = PatrollingGuard->PatrolPointsCPP;
 
 	//set next waypoint
