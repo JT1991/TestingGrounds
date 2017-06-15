@@ -1,6 +1,6 @@
 // Copyright Thorn Productions Inc.
 
-#include "PatrollingGuard.h"
+#include "ThirdPersonCharacter.h"
 
 
 

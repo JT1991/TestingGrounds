@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "TP_ThirdPerson/TP_ThirdPersonCharacter.h"
-#include "PatrollingGuard.generated.h"
+#include "ThirdPersonCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TESTINGGROUNDS_API APatrollingGuard : public ATP_ThirdPersonCharacter
+class TESTINGGROUNDS_API AThirdPersonCharacter : public ATP_ThirdPersonCharacter
 {
 	GENERATED_BODY()
 	public:// todo remove
