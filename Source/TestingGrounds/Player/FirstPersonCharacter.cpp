@@ -2,6 +2,7 @@
 
 #include "FirstPersonCharacter.h"
 #include "../Weapons/BallProjectile.h"
+#include "../Weapons/Gun.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -66,10 +67,12 @@ void ATestingGroundsCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
-	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
-	//FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-
-	
+	if (GunBlueprint == NULL) {
+		UE_LOG(LogTemp, Warning, TEXT("Gun blueprint missing."));
+		return;
+	}
+	Gun = GetWorld()->SpawnActor<AGun>(GunBlueprint);
+	Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint")); //Attach gun mesh component to Skeleton, doing it here because the skelton is not yet created in the constructor
 }
 
 //////////////////////////////////////////////////////////////////////////
