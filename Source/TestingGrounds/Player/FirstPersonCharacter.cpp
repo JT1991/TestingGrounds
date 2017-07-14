@@ -15,9 +15,9 @@
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
 //////////////////////////////////////////////////////////////////////////
-// AFirstPersonCharacter
+// ATestingGroundsCharacter
 
-AFirstPersonCharacter::AFirstPersonCharacter()
+ATestingGroundsCharacter::ATestingGroundsCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
@@ -62,7 +62,7 @@ AFirstPersonCharacter::AFirstPersonCharacter()
 	//bUsingMotionControllers = true;
 }
 
-void AFirstPersonCharacter::BeginPlay()
+void ATestingGroundsCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
@@ -71,35 +71,14 @@ void AFirstPersonCharacter::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("Gun blueprint missing."));
 		return;
 	}
-
-	//UWorld* const World = GetWorld();
-	//if (World != NULL) {
-		//if (Gun) {
-	Gun = GetWorld()->SpawnActor<AGun>(GunBlueprint);
-
-	//Attach gun mesh component to Skeleton, doing it here because the skelton is not yet created in the constructor
-	if (IsPlayerControlled()) {
-		Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-	}
-	else {
-		Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint_0"));
-	}
-
-
-		//}
-		//else {
-		//	UE_LOG(LogTemp, Warning, TEXT("Gun not setting."));
-		//}
+	//Gun = GetWorld()->SpawnActor<AGun>(GunBlueprint);
+	//Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint")); //Attach gun mesh component to Skeleton, doing it here because the skelton is not yet created in the constructor
 }
-	//else {
-		//UE_LOG(LogTemp, Warning, TEXT("GetWorld is Null."));
-	//}
-
 
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void AFirstPersonCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+void ATestingGroundsCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// set up gameplay key bindings
 	check(PlayerInputComponent);
@@ -107,32 +86,32 @@ void AFirstPersonCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::TouchStarted);
+	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ATestingGroundsCharacter::TouchStarted);
 	if (EnableTouchscreenMovement(PlayerInputComponent) == false)
 	{
-		//PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AFirstPersonCharacter::OnFire);
+		//PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ATestingGroundsCharacter::OnFire);
 	}
 
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AFirstPersonCharacter::OnResetVR);
+	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ATestingGroundsCharacter::OnResetVR);
 
-	PlayerInputComponent->BindAxis("MoveForward", this, &AFirstPersonCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AFirstPersonCharacter::MoveRight);
+	PlayerInputComponent->BindAxis("MoveForward", this, &ATestingGroundsCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ATestingGroundsCharacter::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("TurnRate", this, &AFirstPersonCharacter::TurnAtRate);
+	PlayerInputComponent->BindAxis("TurnRate", this, &ATestingGroundsCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("LookUpRate", this, &AFirstPersonCharacter::LookUpAtRate);
+	PlayerInputComponent->BindAxis("LookUpRate", this, &ATestingGroundsCharacter::LookUpAtRate);
 }
 
-void AFirstPersonCharacter::OnResetVR()
+void ATestingGroundsCharacter::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void AFirstPersonCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
+void ATestingGroundsCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	if (TouchItem.bIsPressed == true)
 	{
@@ -144,7 +123,7 @@ void AFirstPersonCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, cons
 	TouchItem.bMoved = false;
 }
 
-void AFirstPersonCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
+void ATestingGroundsCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	if (TouchItem.bIsPressed == false)
 	{
@@ -160,7 +139,7 @@ void AFirstPersonCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const 
 //Commenting this section out to be consistent with FPS BP template.
 //This allows the user to turn without using the right virtual joystick
 
-//void AFirstPersonCharacter::TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location)
+//void ATestingGroundsCharacter::TouchUpdate(const ETouchIndex::Type FingerIndex, const FVector Location)
 //{
 //	if ((TouchItem.bIsPressed == true) && (TouchItem.FingerIndex == FingerIndex))
 //	{
@@ -195,7 +174,7 @@ void AFirstPersonCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const 
 //	}
 //}
 
-void AFirstPersonCharacter::MoveForward(float Value)
+void ATestingGroundsCharacter::MoveForward(float Value)
 {
 	if (Value != 0.0f)
 	{
@@ -204,7 +183,7 @@ void AFirstPersonCharacter::MoveForward(float Value)
 	}
 }
 
-void AFirstPersonCharacter::MoveRight(float Value)
+void ATestingGroundsCharacter::MoveRight(float Value)
 {
 	if (Value != 0.0f)
 	{
@@ -213,29 +192,29 @@ void AFirstPersonCharacter::MoveRight(float Value)
 	}
 }
 
-void AFirstPersonCharacter::TurnAtRate(float Rate)
+void ATestingGroundsCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
-void AFirstPersonCharacter::LookUpAtRate(float Rate)
+void ATestingGroundsCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-bool AFirstPersonCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)
+bool ATestingGroundsCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)
 {
 	bool bResult = false;
 	if (FPlatformMisc::GetUseVirtualJoysticks() || GetDefault<UInputSettings>()->bUseMouseForTouch)
 	{
 		bResult = true;
-		PlayerInputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AFirstPersonCharacter::BeginTouch);
-		PlayerInputComponent->BindTouch(EInputEvent::IE_Released, this, &AFirstPersonCharacter::EndTouch);
+		PlayerInputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ATestingGroundsCharacter::BeginTouch);
+		PlayerInputComponent->BindTouch(EInputEvent::IE_Released, this, &ATestingGroundsCharacter::EndTouch);
 
 		//Commenting this out to be more consistent with FPS BP template.
-		//PlayerInputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AFirstPersonCharacter::TouchUpdate);
+		//PlayerInputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ATestingGroundsCharacter::TouchUpdate);
 	}
 	return bResult;
 }
