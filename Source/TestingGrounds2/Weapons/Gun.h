@@ -16,6 +16,7 @@ public:
 	AGun();
 
 	/** Fires a projectile. */
+	UFUNCTION(Blueprintcallable, Category = "Setup")
 	void OnFire();
 
 	// Called when the game starts or when spawned
