@@ -36,7 +36,7 @@ void ATile::PositionNavMeshBoundsVolume()
 }
 
 template<class T>
-void RandomlyPlaceActors(TSubclassOf<T> ToSpawn, int MinSpawn, int MaxSpawn, float Radius, float MinScale, float MaxScale)
+void ATile::RandomlyPlaceActors(TSubclassOf<T> ToSpawn, int MinSpawn, int MaxSpawn, float Radius, float MinScale, float MaxScale)
 {
 	int numbertospawn = FMath::RandRange(MinSpawn, MaxSpawn);
 	for (size_t i = 0; i < numbertospawn; i++)
