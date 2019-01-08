@@ -5,21 +5,11 @@ using System.Collections.Generic;
 
 public class TestingGrounds2Target : TargetRules
 {
-	public TestingGrounds2Target(TargetInfo Target)
-	{
-		Type = TargetType.Game;
-	}
+    public TestingGrounds2Target(TargetInfo Target) : base(Target)
+    {
+        Type = TargetType.Game;
 
-	//
-	// TargetRules interface.
-	//
+        ExtraModuleNames.Add("TestingGrounds2");
 
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.Add("TestingGrounds2");
-	}
+    }
 }

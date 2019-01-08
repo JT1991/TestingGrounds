@@ -2,6 +2,7 @@
 
 #include "TestingGrounds2.h"
 #include "Tile.h"
+#include "NavigationSystem.h"
 #include "DrawDebugHelpers.h"
 #include "ActorPool.h"
 
@@ -32,7 +33,7 @@ void ATile::PositionNavMeshBoundsVolume()
 	}
 	UE_LOG(LogTemp, Error, TEXT("[%s] Checked out {%s}"), *GetName(), *NavMeshBoundsVolume->GetName());
 	NavMeshBoundsVolume->SetActorLocation(GetActorLocation() + NavigationBoundsOffset);
-	GetWorld()->GetNavigationSystem()->Build();
+	FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld())->Build();
 }
 
 template<class T>

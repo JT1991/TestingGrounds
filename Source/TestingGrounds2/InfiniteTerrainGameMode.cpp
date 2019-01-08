@@ -2,7 +2,7 @@
 
 #include "TestingGrounds2.h"
 #include "InfiniteTerrainGameMode.h"
-#include "AI/Navigation/NavMeshBoundsVolume.h"
+#include "NavMesh/NavMeshBoundsVolume.h"
 #include "EngineUtils.h"
 #include "ActorPool.h"
 

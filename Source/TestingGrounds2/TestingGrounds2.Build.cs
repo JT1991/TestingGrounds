@@ -4,8 +4,8 @@ using UnrealBuildTool;
 
 public class TestingGrounds2 : ModuleRules
 {
-	public TestingGrounds2(TargetInfo Target)
-	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "AIModule", "GameplayTasks" });
-	}
+	public TestingGrounds2(ReadOnlyTargetRules Target) : base (Target)
+    {
+  		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "NavigationSystem", "AIModule", "GameplayTasks" });
+    }
 }

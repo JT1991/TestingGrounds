@@ -5,7 +5,8 @@
 #include "TestingGrounds2Projectile.h"
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
-#include "Kismet/HeadMountedDisplayFunctionLibrary.h"
+#include "HeadMountedDisplayFunctionLibrary.h"
+#include "XRMotionControllerBase.h"
 #include "MotionControllerComponent.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
@@ -57,7 +58,7 @@ ATestingGrounds2Character::ATestingGrounds2Character()
 
 	// Create VR Controllers.
 	R_MotionController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("R_MotionController"));
-	R_MotionController->Hand = EControllerHand::Right;
+	R_MotionController->MotionSource = FXRMotionControllerBase::RightHandSourceId;
 	R_MotionController->SetupAttachment(RootComponent);
 	L_MotionController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("L_MotionController"));
 	L_MotionController->SetupAttachment(RootComponent);
